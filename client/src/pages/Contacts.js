@@ -13,7 +13,7 @@ export default function Contacts() {
     useEffect(() => {
         const fetchContacts = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/contacts", {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/contacts`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setContacts(response.data);
@@ -27,7 +27,7 @@ export default function Contacts() {
     // Ajout d'un nouveau contact
     const addContact = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/contacts", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/contacts`, {
                 firstName,
                 lastName,
                 phone,
@@ -45,7 +45,7 @@ export default function Contacts() {
     // Suppression d'un contact
     const deleteContact = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/contacts/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+            await axios.delete(`${process.env.REACT_APP_API_URL}/contacts/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             setContacts(contacts.filter(contact => contact._id !== id));
             setMessage("Contact supprimé avec succès !");
         } catch (error) {
@@ -54,7 +54,7 @@ export default function Contacts() {
     }
 
     // Modification d'un contact
-    const updateContact = async (id) => { }
+    // const updateContact = async (id) => { }
 
     return (
         <div>
